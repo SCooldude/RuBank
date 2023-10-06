@@ -1,2 +1,7 @@
-package banking;public class TransactionManager {
+package banking;
+
+public class TransactionManager {
+    public void run() {
+
+    }
 }

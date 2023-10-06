@@ -1,2 +1,4 @@
-package banking;public class Date {
+package banking;
+
+public class Date {
 }

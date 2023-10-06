@@ -1,2 +1,5 @@
-package banking;public class MoneyMarket {
+package banking;
+
+public class MoneyMarket extends Savings{
+    private int withdrawal; //number of withdrawals
 }
