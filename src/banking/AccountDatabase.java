@@ -18,7 +18,7 @@ public class AccountDatabase {
         return false;
     } //overload if necessary
     public boolean open(Account account){
-        return false;
+        return true;
     } //add a new account
     public boolean close(Account account){
         return false;

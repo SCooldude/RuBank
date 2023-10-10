@@ -40,8 +40,20 @@ public class TransactionManager {
                             String firstName = tokenizer.nextToken();
                             String lastName = tokenizer.nextToken();
                             String dateString = tokenizer.nextToken();
-                            String deposit = tokenizer.nextToken();
-                            int code = Integer.parseInt(tokenizer.nextToken());
+
+                            try {
+                                double deposit = Double.parseDouble(tokenizer.nextToken());
+
+                                int code = Integer.parseInt(tokenizer.nextToken());
+
+                                if (deposit <= 0) {
+                                    System.out.println("Initial deposit cannot be 0 or negative.");
+                                    break;
+                                }
+                            } catch (NumberFormatException e) {
+                                System.out.println("Not a valid amount.");
+                                break;
+                            }
 
                             Date date = Date.fromDateStr(dateString);
                             if (!date.isValid()) {
@@ -54,21 +66,35 @@ public class TransactionManager {
                             String firstName = tokenizer.nextToken();
                             String lastName = tokenizer.nextToken();
                             String dateString = tokenizer.nextToken();
-                            double deposit = Double.parseDouble(tokenizer.nextToken());
-                            if (accountType.equals("MM")) {
-                                if (deposit < 2000) {
-                                    System.out.println("not enough money for MM");
+                            try {
+                                double deposit = Double.parseDouble(tokenizer.nextToken());
+                                int code = Integer.parseInt(tokenizer.nextToken());
+
+                                if (deposit <= 0) {
+                                    System.out.println("Initial deposit cannot be 0 or negative.");
                                     break;
                                 }
-                            }
-                            Date date = Date.fromDateStr(dateString);
-                            if (!date.isValid()) {
-                                System.out.println("DOB invalid:" + dateString + "cannot be today or a future day.");
+                                Date date = Date.fromDateStr(dateString);
+                                if (!date.isValid()) {
+                                    System.out.println("DOB invalid:" + dateString + "cannot be today or a future day.");
+                                    break;
+                                }
+                                Account account = new Account(accountType,firstName,lastName,date, deposit, code);
+
+                                if (accountDatabase.open(account)) {
+                                    System.out.println(firstName + lastName + dateString + "(" + accountType + ")" + "opened.");
+                                }
+                                else {
+                                    System.out.println(firstName + lastName + dateString + "(" + accountType + ")" + "is already in the database.");
+                                }
+
+                            } catch (NumberFormatException e) {
+                                System.out.println("Not a valid amount.");
                                 break;
                             }
 
                         } else {
-                            System.out.println("error");
+                            System.out.println("Missing data for opening an account.");
                             break;
                         }
 
