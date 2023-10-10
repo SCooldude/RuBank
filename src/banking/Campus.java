@@ -3,14 +3,14 @@ package banking;
 public enum Campus {
     NEW_BRUNSWICK(0), NEWARK(1),CAMDEN(2);
 
-private int code;
+private int collegeCode;
 
 
 Campus(int code){
-        this.code=code;
+        this.collegeCode =code;
     }
-public int getCode(){
-        return code;
+public int getCollegeCode(){
+        return collegeCode;
     }
 
 
