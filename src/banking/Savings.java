@@ -8,6 +8,11 @@ public class Savings extends Account {
     }
 
     @Override
+    public String accountType() {
+        return "Savings";
+    }
+
+    @Override
     public double monthlyInterest() {
         if (isLoyal){
             return (balance*4.25)/12.0;

@@ -130,6 +130,22 @@ public class Date implements Comparable<Date> {
         return (year % QUADRENNIAL == 0 && year % CENTENNIAL != 0) || (year % QUATERCENTENNIAL == 0);
     }
 
+    public int calculateAge() {
+        Calendar currentDate = Calendar.getInstance();
+        int currentYear = currentDate.get(Calendar.YEAR);
+        int currentMonth = currentDate.get(Calendar.MONTH) + 1;
+        int currentDay = currentDate.get(Calendar.DAY_OF_MONTH);
+
+        int age = currentYear - year;
+
+        // Adjust the age if the birth date hasn't occurred yet this year
+        if (currentMonth < month || (currentMonth == month && currentDay < day)) {
+            age--;
+        }
+
+        return age;
+    }
+
     /**
      * Compares the current date to another date
      *

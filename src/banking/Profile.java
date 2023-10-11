@@ -20,12 +20,9 @@ public class Profile implements Comparable<Profile>{
         if (this == obj) {
             return true;
         }
-        if (obj == null || getClass() != obj.getClass()) {
-            return false;
-        }
         Profile otherProfile = (Profile) obj;
-        return fname.equals(otherProfile.fname) &&
-                lname.equals(otherProfile.lname) && dob.getYear() == otherProfile.dob.getYear() &&
+        return fname.equalsIgnoreCase(otherProfile.fname) &&
+                lname.equalsIgnoreCase(otherProfile.lname) && dob.getYear() == otherProfile.dob.getYear() &&
                 dob.getMonth() == otherProfile.dob.getMonth() &&
                 dob.getDay() == otherProfile.dob.getDay();
     }

@@ -7,6 +7,10 @@ public class CollegeChecking extends Checking {
         super(profile, deposit);
         this.campus = campus;
     }
+    @Override
+    public String accountType() {
+        return "CollegeChecking";
+    }
 
     public boolean isValidCode() {
         return campus.getCollegeCode() > 0 && campus.getCollegeCode() < 3;

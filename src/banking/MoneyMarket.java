@@ -7,6 +7,10 @@ public class MoneyMarket extends Savings {
         super(profile, deposit, isLoyal);
         this.withdrawal = withdrawal;
     }
+    @Override
+    public String accountType() {
+        return "MoneyMarket";
+    }
 
     private double withdrawalFee() {
         if (withdrawal > 3.0) {

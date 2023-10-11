@@ -30,6 +30,7 @@ public class TransactionManager {
     }
     private void processCommand(String command) {
         StringTokenizer tokenizer = new StringTokenizer(command);
+        boolean invalidcode = false;
             if (tokenizer.hasMoreTokens()) {
                 String action = tokenizer.nextToken();
 
@@ -47,14 +48,23 @@ public class TransactionManager {
                         Date date = Date.fromDateStr(dateString);
 
                         if (!date.isValid()) {
+                            System.out.println("DOB invalid: " + dateString + " not a valid calendar date!");
+                            break;
+                        }
+                        if (!date.isFutureDate()) {
                             System.out.println("DOB invalid: " + dateString + " cannot be today or a future day.");
                             break;
                         }
+                        int age = date.calculateAge();
 
                         Account account = null;
 
                         switch (accountType) {
                             case "C":
+                                if (age < 16) {
+                                    System.out.println("DOB invalid: " + dateString + " under 16.");
+                                    break;
+                                }
                                 try {
                                     double deposit = Double.parseDouble(tokenizer.nextToken());
                                     if (deposit <= 0) {
@@ -69,6 +79,10 @@ public class TransactionManager {
                                 break;
 
                             case "MM":
+                                if (age < 16) {
+                                    System.out.println("DOB invalid: " + dateString + " under 16.");
+                                    break;
+                                }
                                 try {
                                     double deposit = Double.parseDouble(tokenizer.nextToken());
                                     if (deposit <= 0) {
@@ -88,6 +102,10 @@ public class TransactionManager {
                                 break;
 
                             case "S":
+                                if (age < 16) {
+                                    System.out.println("DOB invalid: " + dateString + " under 16.");
+                                    break;
+                                }
                                 try {
                                     double deposit = Double.parseDouble(tokenizer.nextToken());
                                     int code = Integer.parseInt(tokenizer.nextToken());
@@ -104,6 +122,14 @@ public class TransactionManager {
                                 break;
 
                             case "CC":
+                                if (age < 16) {
+                                    System.out.println("DOB invalid: " + dateString + " under 16.");
+                                    break;
+                                }
+                                if (age >= 24) {
+                                    System.out.println("DOB invalid: " + dateString + " over 24.");
+                                    break;
+                                }
                                 try {
                                     double deposit = Double.parseDouble(tokenizer.nextToken());
                                     int code = Integer.parseInt(tokenizer.nextToken());
@@ -120,6 +146,7 @@ public class TransactionManager {
                                             break;
                                         default:
                                             System.out.println("Invalid campus code.");
+                                            invalidcode = true;
                                             break;
                                     }
                                     if (deposit <= 0) {
@@ -133,14 +160,18 @@ public class TransactionManager {
                                 }
                                 break;
                         }
+                        if (invalidcode) {
+                            break;
+                        }
 
                         if (account != null) {
                             if (accountDatabase.open(account)) {
-                                System.out.println(firstName + " " + lastName + " "  + dateString + " (" + accountType + ")" + " opened.");
+                                System.out.println(firstName + " " + lastName + " " + dateString + " (" + accountType + ")" + " opened.");
                             } else {
-                                System.out.println(firstName + " " + lastName + " " +  dateString + " (" + accountType + ")" + " is already in the database.");
+                                System.out.println(firstName + " " + lastName + " " + dateString + " (" + accountType + ")" + " is already in the database.");
                             }
                         }
+
                         break;
 
                     case ("C"):
