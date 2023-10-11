@@ -5,8 +5,8 @@ public class Checking extends Account {
     private static final double INTEREST_RATE = 0.01;
     private static final double MONTHLY_FEE_THRESHOLD = 1000.0;
 
-    public Checking(String firstName, String lastName, Date date, double deposit) {
-        super(firstName, lastName, date, deposit);
+    public Checking(Profile profile, double deposit) {
+        super(profile, deposit);
     }
 
     @Override

@@ -3,8 +3,8 @@ package banking;
 public class CollegeChecking extends Checking {
     private Campus campus; //campus code
 
-    public CollegeChecking(String firstName, String lastName, Date date, double deposit, Campus campus) {
-        super(firstName, lastName, date, deposit);
+    public CollegeChecking(Profile profile, double deposit, Campus campus) {
+        super(profile, deposit);
         this.campus = campus;
     }
 

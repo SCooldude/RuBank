@@ -3,17 +3,15 @@ package banking;
 public abstract class Account implements Comparable<Account> {
     protected Profile holder;
     protected double balance;
-    private final String firstName;
-    private final String lastName;
-    private final Date date;
-    private final double deposit;
 
-    public Account(String firstName, String lastName, Date date, double deposit) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.date = date;
-        this.deposit = deposit;
-
+    public Account(Profile profile, double deposit) {
+        this.holder = profile;
+        this.balance = deposit;
+    }
+    @Override
+    public boolean equals(Object obj) {
+        Account account = (Account) obj;
+        return this.holder.equals(account.holder);
     }
 
     public abstract double monthlyInterest();

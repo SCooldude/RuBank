@@ -3,8 +3,9 @@ package banking;
 public class MoneyMarket extends Savings {
     private int withdrawal; //number of withdrawals
 
-    public MoneyMarket(String firstName, String lastName, Date date, double deposit) {
-        super(firstName, lastName, date, deposit);
+    public MoneyMarket(Profile profile, double deposit, boolean isLoyal, int withdrawal) {
+        super(profile, deposit, isLoyal);
+        this.withdrawal = withdrawal;
     }
 
     private double withdrawalFee() {

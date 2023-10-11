@@ -33,93 +33,115 @@ public class TransactionManager {
             if (tokenizer.hasMoreTokens()) {
                 String action = tokenizer.nextToken();
 
-                label:
                 switch (action) {
-                    case ("O"):
-                        if (tokenizer.countTokens() == 6) {
-                            String accountType = tokenizer.nextToken();
-                            String firstName = tokenizer.nextToken();
-                            String lastName = tokenizer.nextToken();
-                            String dateString = tokenizer.nextToken();
+                    case "O":
 
-                            try {
-                                double deposit = Double.parseDouble(tokenizer.nextToken());
-
-                                int code = Integer.parseInt(tokenizer.nextToken());
-
-                                if (deposit <= 0) {
-                                    System.out.println("Initial deposit cannot be 0 or negative.");
-                                    break;
-                                }
-                            } catch (NumberFormatException e) {
-                                System.out.println("Not a valid amount.");
-                                break;
-                            }
-
-                            Date date = Date.fromDateStr(dateString);
-                            if (!date.isValid()) {
-                                System.out.println("DOB invalid:" + dateString + "cannot be today or a future day.");
-                                break;
-                            }
-
-                        } else if (tokenizer.countTokens() == 5) {
-                            String accountType = tokenizer.nextToken();
-                            String firstName = tokenizer.nextToken();
-                            String lastName = tokenizer.nextToken();
-                            String dateString = tokenizer.nextToken();
-                            try {
-                                double deposit = Double.parseDouble(tokenizer.nextToken());
-                                int code = Integer.parseInt(tokenizer.nextToken());
-
-                                if (deposit <= 0) {
-                                    System.out.println("Initial deposit cannot be 0 or negative.");
-                                    break;
-                                }
-                                Date date = Date.fromDateStr(dateString);
-                                if (!date.isValid()) {
-                                    System.out.println("DOB invalid:" + dateString + "cannot be today or a future day.");
-                                    break;
-                                }
-                                boolean isLoyal = false;
-                                if (code == 1) {
-                                    isLoyal == True;
-                                }
-                                Account account = null;
-
-                                switch (accountType) {
-                                    case "C":
-                                        account = new Checking(firstName, lastName, date, deposit);
-                                        break;
-                                    case "CC":
-                                        account = new CollegeChecking(firstName, lastName, date, deposit, campus);
-                                        break;
-                                    case "S":
-                                        account = new Savings(firstName, lastName, date, deposit, isLoyal);
-                                        break;
-                                    case "MM":
-                                        account = new MoneyMarket(firstName, lastName, date, deposit, isLoyal);
-                                        break;
-                                    default:
-                                        System.out.println("Invalid account type: " + accountType);
-                                        break label;
-                                }
-                                if (accountDatabase.open(account)) {
-                                    System.out.println(firstName + lastName + dateString + "(" + accountType + ")" + "opened.");
-                                }
-                                else {
-                                    System.out.println(firstName + lastName + dateString + "(" + accountType + ")" + "is already in the database.");
-                                }
-
-                            } catch (NumberFormatException e) {
-                                System.out.println("Not a valid amount.");
-                                break;
-                            }
-
-                        } else {
+                        if (tokenizer.countTokens() < 5) {
                             System.out.println("Missing data for opening an account.");
                             break;
                         }
+                        String accountType = tokenizer.nextToken();
+                        String firstName = tokenizer.nextToken();
+                        String lastName = tokenizer.nextToken();
+                        String dateString = tokenizer.nextToken();
+                        Date date = Date.fromDateStr(dateString);
 
+                        if (!date.isValid()) {
+                            System.out.println("DOB invalid: " + dateString + " cannot be today or a future day.");
+                            break;
+                        }
+
+                        Account account = null;
+
+                        switch (accountType) {
+                            case "C":
+                                try {
+                                    double deposit = Double.parseDouble(tokenizer.nextToken());
+                                    if (deposit <= 0) {
+                                        System.out.println("Initial deposit cannot be 0 or negative.");
+                                        break;
+                                    }
+                                    Profile profile = new Profile(firstName, lastName, date);
+                                    account = new Checking(profile, deposit);
+                                } catch (NumberFormatException e) {
+                                    System.out.println("Not a valid amount.");
+                                }
+                                break;
+
+                            case "MM":
+                                try {
+                                    double deposit = Double.parseDouble(tokenizer.nextToken());
+                                    if (deposit <= 0) {
+                                        System.out.println("Initial deposit cannot be 0 or negative.");
+                                        break;
+                                    }
+                                    if (deposit < 2000){
+                                        System.out.println("Minimum of $2000 to open a Money Market account.");
+                                        break;
+                                    }
+                                    Profile profile = new Profile(firstName, lastName, date);
+                                    int withdrawal = 0;
+                                    account = new MoneyMarket(profile, deposit, true, withdrawal);
+                                } catch (NumberFormatException e) {
+                                    System.out.println("Not a valid amount.");
+                                }
+                                break;
+
+                            case "S":
+                                try {
+                                    double deposit = Double.parseDouble(tokenizer.nextToken());
+                                    int code = Integer.parseInt(tokenizer.nextToken());
+                                    boolean isLoyal = code == 1;
+                                    if (deposit <= 0) {
+                                        System.out.println("Initial deposit cannot be 0 or negative.");
+                                        break;
+                                    }
+                                    Profile profile = new Profile(firstName, lastName, date);
+                                    account = new Savings(profile, deposit, isLoyal);
+                                } catch (NumberFormatException e) {
+                                    System.out.println("Not a valid amount.");
+                                }
+                                break;
+
+                            case "CC":
+                                try {
+                                    double deposit = Double.parseDouble(tokenizer.nextToken());
+                                    int code = Integer.parseInt(tokenizer.nextToken());
+                                    Campus campus = null;
+                                    switch (code) {
+                                        case 0:
+                                            campus = Campus.NEW_BRUNSWICK;
+                                            break;
+                                        case 1:
+                                            campus = Campus.NEWARK;
+                                            break;
+                                        case 2:
+                                            campus = Campus.CAMDEN;
+                                            break;
+                                        default:
+                                            System.out.println("Invalid campus code.");
+                                            break;
+                                    }
+                                    if (deposit <= 0) {
+                                        System.out.println("Initial deposit cannot be 0 or negative.");
+                                        break;
+                                    }
+                                    Profile profile = new Profile(firstName, lastName, date);
+                                    account = new CollegeChecking(profile, deposit, campus);
+                                } catch (NumberFormatException e) {
+                                    System.out.println("Not a valid amount.");
+                                }
+                                break;
+                        }
+
+                        if (account != null) {
+                            if (accountDatabase.open(account)) {
+                                System.out.println(firstName + " " + lastName + " "  + dateString + " (" + accountType + ")" + " opened.");
+                            } else {
+                                System.out.println(firstName + " " + lastName + " " +  dateString + " (" + accountType + ")" + " is already in the database.");
+                            }
+                        }
+                        break;
 
                     case ("C"):
 
@@ -145,8 +167,8 @@ public class TransactionManager {
                             System.out.println("Invalid command!");
                         } else {
                             System.out.println("Invalid command!");
-                        }
+                }
            }
-            }
+        }
     }
 }

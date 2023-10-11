@@ -2,8 +2,8 @@ package banking;
 
 public class Savings extends Account {
     protected boolean isLoyal;
-    public Savings(String firstName, String lastName, Date date, double deposit, boolean loyal) {
-        super(firstName, lastName, date, deposit);
+    public Savings(Profile profile, double deposit, boolean loyal) {
+        super(profile, deposit);
         this.isLoyal = loyal;
     }
 
