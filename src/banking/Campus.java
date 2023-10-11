@@ -3,7 +3,7 @@ package banking;
 public enum Campus {
     NEW_BRUNSWICK(0), NEWARK(1),CAMDEN(2);
 
-private int collegeCode;
+private final int collegeCode;
 
 
 Campus(int code){

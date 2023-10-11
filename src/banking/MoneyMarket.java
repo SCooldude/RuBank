@@ -1,9 +1,13 @@
 package banking;
 
-public class MoneyMarket extends Savings{
+public class MoneyMarket extends Savings {
     private int withdrawal; //number of withdrawals
 
-    private double withdrawalFee() {// checks if withdrawlfee applies
+    public MoneyMarket(String firstName, String lastName, Date date, double deposit) {
+        super(firstName, lastName, date, deposit);
+    }
+
+    private double withdrawalFee() {
         if (withdrawal > 3.0) {
             return 10.0;
         }
@@ -11,12 +15,7 @@ public class MoneyMarket extends Savings{
         return 0;
     }
     public boolean loyaltyStatus(){
-        if (balance <2000.0){
-            return false;
-        }
-        else{
-            return true;
-        }
+        return !(balance < 2000.0);
     }
     @Override
     public double monthlyFee() {

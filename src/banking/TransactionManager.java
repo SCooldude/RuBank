@@ -33,6 +33,7 @@ public class TransactionManager {
             if (tokenizer.hasMoreTokens()) {
                 String action = tokenizer.nextToken();
 
+                label:
                 switch (action) {
                     case ("O"):
                         if (tokenizer.countTokens() == 6) {
@@ -79,8 +80,29 @@ public class TransactionManager {
                                     System.out.println("DOB invalid:" + dateString + "cannot be today or a future day.");
                                     break;
                                 }
-                                Account account = new Account(accountType,firstName,lastName,date, deposit, code);
+                                boolean isLoyal = false;
+                                if (code == 1) {
+                                    isLoyal == True;
+                                }
+                                Account account = null;
 
+                                switch (accountType) {
+                                    case "C":
+                                        account = new Checking(firstName, lastName, date, deposit);
+                                        break;
+                                    case "CC":
+                                        account = new CollegeChecking(firstName, lastName, date, deposit, campus);
+                                        break;
+                                    case "S":
+                                        account = new Savings(firstName, lastName, date, deposit, isLoyal);
+                                        break;
+                                    case "MM":
+                                        account = new MoneyMarket(firstName, lastName, date, deposit, isLoyal);
+                                        break;
+                                    default:
+                                        System.out.println("Invalid account type: " + accountType);
+                                        break label;
+                                }
                                 if (accountDatabase.open(account)) {
                                     System.out.println(firstName + lastName + dateString + "(" + accountType + ")" + "opened.");
                                 }
@@ -125,6 +147,6 @@ public class TransactionManager {
                             System.out.println("Invalid command!");
                         }
            }
-        }
+            }
     }
 }

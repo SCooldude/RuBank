@@ -1,6 +1,12 @@
 package banking;
 
-public class Savings extends Account{
+public class Savings extends Account {
+    protected boolean isLoyal;
+    public Savings(String firstName, String lastName, Date date, double deposit, boolean loyal) {
+        super(firstName, lastName, date, deposit);
+        this.isLoyal = loyal;
+    }
+
     @Override
     public double monthlyInterest() {
         if (isLoyal){
@@ -26,6 +32,5 @@ public class Savings extends Account{
     public int compareTo(Account o) {
         return 0;
     }
-    protected boolean isLoyal;//loyal customer status
 
 }
