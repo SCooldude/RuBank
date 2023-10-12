@@ -62,7 +62,6 @@ public class AccountDatabase {
                 boolean swapped = false;
                 for (int j = 0; j < numAcct - i - 1; j++) {
                     if (accounts[j].compareTo(accounts[j + 1]) > 0) {
-                        // Swap events[j] and events[j+1]
                         Account temp = accounts[j];
                         accounts[j] = accounts[j + 1];
                         accounts[j + 1] = temp;

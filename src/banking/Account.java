@@ -24,12 +24,6 @@ public abstract class Account implements Comparable<Account> {
         }
         return getClass() == obj.getClass();
     }
-    @Override
-    public String toString() {
-
-    }
-
-
 
     public abstract double monthlyInterest();
     public abstract double monthlyFee();
