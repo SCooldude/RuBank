@@ -53,11 +53,29 @@ public class AccountDatabase {
         return false;
     } //false if insufficient fund
     public void deposit(Account account){}
-    public void printSorted(){
-        if (numAcct == 0){
+    public void printSorted() {
+        if (numAcct == 0) {
             System.out.println("Account Database is empty!");
+        } else {
+            System.out.println("* Accounts sorted by account type and profile. *");
+            for (int i = 0; i < numAcct - 1; i++) {
+                boolean swapped = false;
+                for (int j = 0; j < numAcct - i - 1; j++) {
+                    if (accounts[j].compareTo(accounts[j + 1]) > 0) {
+                        // Swap events[j] and events[j+1]
+                        Account temp = accounts[j];
+                        accounts[j] = accounts[j + 1];
+                        accounts[j + 1] = temp;
+                        swapped = true;
+                    }
+                }
+                if (!swapped) {
+                    break;
+                }
+                System.out.println("* end of list.");
+            }
         }
-    } //sort by account type and profile
+    }
     public void printFeesAndInterests(){
         if (numAcct == 0){
             System.out.println("Account Database is empty!");

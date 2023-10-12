@@ -13,11 +13,9 @@ public abstract class Account implements Comparable<Account> {
     @Override
     public boolean equals(Object obj) {
         Account account = (Account) obj;
-
         if (!holder.equals(account.holder)) {
             return false;
         }
-
         if (this.accountType().equals("Checking") && account.accountType().equals("CollegeChecking")) {
             return true;
         }
@@ -25,6 +23,10 @@ public abstract class Account implements Comparable<Account> {
             return true;
         }
         return getClass() == obj.getClass();
+    }
+    @Override
+    public String toString() {
+
     }
 
 
