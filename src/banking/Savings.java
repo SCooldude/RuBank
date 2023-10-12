@@ -11,7 +11,7 @@ public class Savings extends Account {
     public String accountType() {
         return "Savings";
     }
-    //hello your mother
+    //hello
 
     @Override
     public double monthlyInterest() {
