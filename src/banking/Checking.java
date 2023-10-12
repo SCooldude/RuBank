@@ -28,8 +28,4 @@ public class Checking extends Account {
         }
     }
 
-    @Override
-    public int compareTo(Account o) {
-        return Double.compare(this.balance, o.balance);
-    }
 }

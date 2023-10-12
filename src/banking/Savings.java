@@ -34,9 +34,4 @@ public class Savings extends Account {
         }
     }
 
-    @Override
-    public int compareTo(Account o) {
-        return 0;
-    }
-
 }

@@ -41,5 +41,4 @@ public class MoneyMarket extends Savings {
             return (balance*4.5)/12.0;
         }
     }
-
 }

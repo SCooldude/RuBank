@@ -71,8 +71,11 @@ public class AccountDatabase {
                 if (!swapped) {
                     break;
                 }
-                System.out.println("* end of list.");
             }
+            for (int i = 0; i < numAcct; i++) {
+                System.out.println(accounts[i].toString());
+            }
+            System.out.println("* end of list.");
         }
     }
     public void printFeesAndInterests(){
