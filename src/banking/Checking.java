@@ -10,6 +10,7 @@ public class Checking extends Account {
         return "Checking";
     }
 
+
     public Checking(Profile profile, double deposit) {
         super(profile, deposit);
     }
@@ -28,8 +29,4 @@ public class Checking extends Account {
         }
     }
 
-    @Override
-    public int compareTo(Account o) {
-        return Double.compare(this.balance, o.balance);
-    }
 }

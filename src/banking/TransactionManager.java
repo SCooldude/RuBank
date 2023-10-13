@@ -35,7 +35,7 @@ public class TransactionManager {
                 String action = tokenizer.nextToken();
 
                 switch (action) {
-                    case "O":
+                    case "O": {
 
                         if (tokenizer.countTokens() < 5) {
                             System.out.println("Missing data for opening an account.");
@@ -89,7 +89,7 @@ public class TransactionManager {
                                         System.out.println("Initial deposit cannot be 0 or negative.");
                                         break;
                                     }
-                                    if (deposit < 2000){
+                                    if (deposit < 2000) {
                                         System.out.println("Minimum of $2000 to open a Money Market account.");
                                         break;
                                     }
@@ -173,9 +173,41 @@ public class TransactionManager {
                         }
 
                         break;
+                    }
 
-                    case ("C"):
+                    case ("C"): {
+                        if (tokenizer.countTokens() < 4) {
+                            System.out.println("Missing data for closing an account.");
+                            break;
+                        }
 
+                        String accountType = tokenizer.nextToken();
+                        String firstName = tokenizer.nextToken();
+                        String lastName = tokenizer.nextToken();
+                        String dateString = tokenizer.nextToken();
+                        Date date = Date.fromDateStr(dateString);
+
+                        if (!date.isFutureDate()) {
+                            System.out.println("DOB invalid: " + dateString + " cannot be today or a future day.");
+                            break;
+                        }
+                        Profile profile = new Profile(firstName, lastName, date);
+
+                        Account accountToClose = switch (accountType) {
+                            case "C" -> new Checking(profile, 0.0);
+                            case "MM" -> new MoneyMarket(profile, 0.0, true, 0);
+                            case "S" -> new Savings(profile, 0.0, false);
+                            case "CC" -> new CollegeChecking(profile, 0.0, Campus.NEW_BRUNSWICK);
+                            default -> null;
+                        };
+
+                        if (accountDatabase.close(accountToClose)) {
+                            System.out.println(firstName + " " + lastName + " " + dateString + " (" + accountType + ")" + " closed.");
+                        } else {
+                            System.out.println(firstName + " " + lastName + " " + dateString + " (" + accountType + ")" + " is not in the database.");
+                        }
+                        break;
+                    }
                     case ("D"):
 
                     case ("W"):

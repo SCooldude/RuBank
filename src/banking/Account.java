@@ -17,12 +17,35 @@ public abstract class Account implements Comparable<Account> {
             return false;
         }
         if (this.accountType().equals("Checking") && account.accountType().equals("CollegeChecking")) {
-            return true;
+            if (account.balance == 0.0) {
+                return false;
+            } else {
+                return true;
+            }
         }
         if (this.accountType().equals("CollegeChecking") && account.accountType().equals("Checking")) {
-            return true;
+            if (account.balance == 0.0){
+                return false;
+            }
+            else {
+                return true;
+            }
         }
         return getClass() == obj.getClass();
+    }
+
+    @Override
+    public int compareTo(Account account) {
+        int accountTypeComparison = this.accountType().compareTo(account.accountType());
+        if (accountTypeComparison != 0) {
+            return accountTypeComparison;
+        }
+
+        return this.holder.compareTo(account.holder);
+    }
+    @Override
+    public String toString() {
+        return accountType() + "::" + holder + "::Balance $" + String.format("%.2f", balance);
     }
 
     public abstract double monthlyInterest();

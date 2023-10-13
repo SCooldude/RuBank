@@ -33,7 +33,7 @@ public class AccountDatabase {
     } //increase the capacity by 4
     public boolean contains(Account account){
         return false;
-    } //overload if necessary
+    }
     public boolean open(Account account){
         int duplicateIndex = find(account);
         if (duplicateIndex != NOT_FOUND) {
@@ -47,8 +47,18 @@ public class AccountDatabase {
         return true;
     } //add a new account
     public boolean close(Account account){
-        return false;
-    } //remove the given account
+        int found = find(account);
+        if (found == NOT_FOUND) {
+            return false;
+        } else {
+            for (int i = found; i < numAcct - 1; i++) {
+                accounts[i] = accounts[i + 1];
+            }
+            accounts[numAcct - 1] = null;
+            numAcct--;
+            return true;
+        }
+    }
     public boolean withdraw(Account account){
         return false;
     } //false if insufficient fund
@@ -71,8 +81,11 @@ public class AccountDatabase {
                 if (!swapped) {
                     break;
                 }
-                System.out.println("* end of list.");
             }
+            for (int i = 0; i < numAcct; i++) {
+                System.out.println(accounts[i].toString());
+            }
+            System.out.println("* end of list.");
         }
     }
     public void printFeesAndInterests(){
