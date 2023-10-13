@@ -49,7 +49,7 @@ public class Profile implements Comparable<Profile> {
 
     @Override
     public String toString() {
-        return fname + " " + lname + " " + dob + "::";
+        return fname + " " + lname + " " + dob.getMonth() + "/" + dob.getDay() +  "/" + dob.getYear();
     }
 }
 
