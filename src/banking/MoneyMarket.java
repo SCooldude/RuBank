@@ -1,11 +1,12 @@
 package banking;
 
 public class MoneyMarket extends Savings {
-    private int withdrawal; //number of withdrawals
+    private int withdrawl; //number of withdrawals
+
 
     public MoneyMarket(Profile profile, double deposit, boolean isLoyal, int withdrawal) {
         super(profile, deposit, isLoyal);
-        this.withdrawal = withdrawal;
+        this.withdrawl = withdrawal;
     }
     @Override
     public String accountType() {
@@ -13,7 +14,7 @@ public class MoneyMarket extends Savings {
     }
 
     private double withdrawalFee() {
-        if (withdrawal > 3.0) {
+        if (withdrawl > 3.0) {
             return 10.0;
         }
 
