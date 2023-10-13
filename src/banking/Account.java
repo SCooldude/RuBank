@@ -17,10 +17,19 @@ public abstract class Account implements Comparable<Account> {
             return false;
         }
         if (this.accountType().equals("Checking") && account.accountType().equals("CollegeChecking")) {
-            return true;
+            if (account.balance == 0.0) {
+                return false;
+            } else {
+                return true;
+            }
         }
         if (this.accountType().equals("CollegeChecking") && account.accountType().equals("Checking")) {
-            return true;
+            if (account.balance == 0.0){
+                return false;
+            }
+            else {
+                return true;
+            }
         }
         return getClass() == obj.getClass();
     }
