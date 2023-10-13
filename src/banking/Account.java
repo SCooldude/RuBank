@@ -31,6 +31,7 @@ public abstract class Account implements Comparable<Account> {
         if (accountTypeComparison != 0) {
             return accountTypeComparison;
         }
+
         return this.holder.compareTo(account.holder);
     }
     @Override

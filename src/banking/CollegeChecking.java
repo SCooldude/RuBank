@@ -34,6 +34,4 @@ public class CollegeChecking extends Checking {
             return 0;
     }
 
-
-
 }

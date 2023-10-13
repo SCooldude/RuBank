@@ -10,6 +10,7 @@ public class Checking extends Account {
         return "Checking";
     }
 
+
     public Checking(Profile profile, double deposit) {
         super(profile, deposit);
     }

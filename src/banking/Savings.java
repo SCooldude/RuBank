@@ -33,9 +33,6 @@ public class Savings extends Account {
             return 25.0;
         }
     }
-    @Override
-    public String toString() {
-        return super.toString() + (isLoyal ? "::is loyal" : "");
-    }
+
 
 }
