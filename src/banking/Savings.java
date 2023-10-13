@@ -33,6 +33,4 @@ public class Savings extends Account {
             return 25.0;
         }
     }
-
-
 }

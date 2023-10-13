@@ -28,7 +28,6 @@ public class CollegeChecking extends Checking {
         return super.toString() + "::" + campus;
     }
 
-
     @Override
     public double monthlyFee() {
             return 0;
