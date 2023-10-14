@@ -34,7 +34,7 @@ public class MoneyMarket extends Savings {
             return 0;
         }
         else{
-            return 25.0;
+            return 25.00;
         }
     }
     @Override
@@ -47,11 +47,11 @@ public class MoneyMarket extends Savings {
     @Override
     public double monthlyInterest() {
         if (loyaltyStatus()){
-            return (balance*4.75)/12.0;
+            return (balance*0.0475)/12.0;
 
         }
         else{
-            return (balance*4.5)/12.0;
+            return (balance*0.045)/12.0;
         }
     }
 }

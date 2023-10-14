@@ -13,7 +13,7 @@ public class CollegeChecking extends Checking {
     }
 
     public boolean isValidCode() {
-        return campus.getCollegeCode() > 0 && campus.getCollegeCode() < 3;
+        return campus.getCollegeCode() >= 0 && campus.getCollegeCode() <= 3;
     }
 
     @Override
@@ -21,7 +21,7 @@ public class CollegeChecking extends Checking {
         if (isValidCode()) {
             return super.monthlyInterest();
         }
-        return 0;
+    return 0.00;
     }
     @Override
     public String AA() {

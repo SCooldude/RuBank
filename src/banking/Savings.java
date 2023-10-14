@@ -16,11 +16,11 @@ public class Savings extends Account {
     @Override
     public double monthlyInterest() {
         if (isLoyal){
-            return (balance*4.25)/12.0;
+            return (balance*0.0425)/12.0;
 
         }
         else{
-            return (balance*4.0)/12.0;
+            return (balance*0.040)/12.0;
         }
 
     }

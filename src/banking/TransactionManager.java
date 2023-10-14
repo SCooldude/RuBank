@@ -312,6 +312,7 @@ public class TransactionManager {
 
                     case ("P"):
                         accountDatabase.printSorted();
+
                         break;
 
                     case ("PI"):

@@ -96,6 +96,7 @@ public class AccountDatabase {
             System.out.println(account.getHolder().toString() + " (" + account.AA() + ") is not in the database.");
         }
     }
+
     public void printSorted() {
         if (numAcct == 0) {
             System.out.println("Account Database is empty!");
@@ -122,13 +123,61 @@ public class AccountDatabase {
         }
     }
     public void printFeesAndInterests(){
-        if (numAcct == 0){
+        if (numAcct == 0) {
             System.out.println("Account Database is empty!");
+        } else {
+            System.out.println("*list of accounts with fee and monthly interest.");
+            for (int i = 0; i < numAcct - 1; i++) {
+                boolean swapped = false;
+                for (int j = 0; j < numAcct - i - 1; j++) {
+                    if (accounts[j].compareTo(accounts[j + 1]) > 0) {
+                        Account temp = accounts[j];
+                        accounts[j] = accounts[j + 1];
+                        accounts[j + 1] = temp;
+                        swapped = true;
+                    }
+                }
+                if (!swapped) {
+                    break;
+                }
+            }
+            for (int i = 0; i < numAcct; i++) {
+                double MFee=accounts[i].monthlyFee();
+                double MIntrestrate=accounts[i].monthlyInterest();
+                System.out.println(accounts[i].toString()+"::fee $"+String.format("%.2f", MFee)+ "::monthly interest $"+String.format("%.2f", MIntrestrate));
+
+            }
+            System.out.println("* end of list.");
         }
     } //calculate interests/fees
-    public void printUpdatedBalances(){
-        if (numAcct == 0){
+    public void printUpdatedBalances() {
+        if (numAcct == 0) {
             System.out.println("Account Database is empty!");
+        } else {
+            System.out.println("*list of accounts with fees and interests applied.");
+            for (int i = 0; i < numAcct - 1; i++) {
+                boolean swapped = false;
+                for (int j = 0; j < numAcct - i - 1; j++) {
+                    if (accounts[j].compareTo(accounts[j + 1]) > 0) {
+                        Account temp = accounts[j];
+                        accounts[j] = accounts[j + 1];
+                        accounts[j + 1] = temp;
+                        swapped = true;
+                    }
+                }
+                if (!swapped) {
+                    break;
+                }
+            }
+            for (int i = 0; i < numAcct; i++) {
+                double MFee = accounts[i].monthlyFee();
+                double MIntrestrate = accounts[i].monthlyInterest();
+                accounts[i].balance= accounts[i].balance + MFee +MIntrestrate;
+
+                System.out.println(accounts[i].toString());
+
+            }
+            System.out.println("* end of list.");
         }
     }
 }
