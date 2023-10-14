@@ -23,6 +23,9 @@ public class AccountDatabase {
     public int getNumAcct() {
         return numAcct;
     }
+    public Account[] getAccounts() {
+        return accounts;
+    }
     private void grow(){
         Account[] new_accounts = new Account[accounts.length + 4];
 

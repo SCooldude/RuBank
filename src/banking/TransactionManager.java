@@ -291,14 +291,24 @@ public class TransactionManager {
                             default -> null;
                         };
 
-                        if (accountDatabase.withdraw(shellAccount)) {
-                            System.out.println(firstName + " " + lastName + " (" + accountType + ") Withdraw - balance updated.");
-                        } else {
-                            System.out.println(firstName + " " + lastName + " (" + accountType + ") Withdraw - insufficient fund.");
+                        boolean accountExists = false;
+                        for (int i = 0; i < accountDatabase.getNumAcct(); i++) {
+                            if (accountDatabase.getAccounts()[i].equals(shellAccount, 5)) {
+                                accountExists = true;
+                                boolean withdrawalStatus = accountDatabase.withdraw(shellAccount);
+                                if (withdrawalStatus) {
+                                    System.out.println(firstName + " " + lastName + " " + dateString + " (" + accountType + ") Withdrawal - balance updated.");
+                                } else {
+                                    System.out.println(firstName + " " + lastName + " " + dateString + " (" + accountType + ") Withdrawal - insufficient funds.");
+                                }
+                            }
+                        }
+
+                        if (!accountExists) {
+                            System.out.println(firstName + " " + lastName + " " + dateString + " (" + accountType + ") is not in the database.");
                         }
                         break;
                     }
-
 
                     case ("P"):
                         accountDatabase.printSorted();
