@@ -243,6 +243,7 @@ public class TransactionManager {
                             case "CC" -> new CollegeChecking(profile, depositAmount, Campus.NEW_BRUNSWICK);
                             default -> null;
                         };
+
                         boolean accountExists = false;
                         for (int i = 0; i < accountDatabase.getNumAcct(); i++) {
                             if (accountDatabase.getAccounts()[i].equals(shellAccount)) {
