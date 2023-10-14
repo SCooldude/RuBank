@@ -208,7 +208,46 @@ public class TransactionManager {
                         }
                         break;
                     }
-                    case ("D"):
+                    case ("D"): {
+                        if (tokenizer.countTokens() < 4) {
+                            System.out.println("Missing data for the deposit operation.");
+                            break;
+                        }
+
+                        String accountType = tokenizer.nextToken();
+                        String firstName = tokenizer.nextToken();
+                        String lastName = tokenizer.nextToken();
+                        String dateString = tokenizer.nextToken();
+                        double depositAmount = 0.0;
+
+                        try {
+                            depositAmount = Double.parseDouble(tokenizer.nextToken());
+                        } catch (NumberFormatException e) {
+                            System.out.println("Invalid deposit amount.");
+                            break;
+                        }
+
+                        Date date = Date.fromDateStr("01/01/2000"); // Replace with the appropriate date or method to create a date.
+
+                        if (!date.isFutureDate()) {
+                            System.out.println("DOB invalid: " + dateString + " cannot be today or a future day.");
+                            break;
+                        }
+
+                        Profile profile = new Profile(firstName, lastName, date);
+
+                        Account shellAccount = switch (accountType) {
+                            case "C" -> new Checking(profile, depositAmount);
+                            case "MM" -> new MoneyMarket(profile, depositAmount, true, 0);
+                            case "S" -> new Savings(profile, depositAmount, false);
+                            case "CC" -> new CollegeChecking(profile, depositAmount, Campus.NEW_BRUNSWICK);
+                            default -> null;
+                        };
+                        accountDatabase.deposit(shellAccount);
+                            System.out.println(firstName + " " + lastName + " " + "(" + accountType + ")" + " deposited $" + depositAmount);
+                        break;
+                    }
+
 
                     case ("W"):
 

@@ -62,7 +62,13 @@ public class AccountDatabase {
     public boolean withdraw(Account account){
         return false;
     } //false if insufficient fund
-    public void deposit(Account account){}
+    public void deposit(Account account){
+        for (int i = 0; i < numAcct; i++) {
+            if (accounts[i].equals(account)) {
+                accounts[i].deposit(account.getBalance());
+            }
+        }
+    }
     public void printSorted() {
         if (numAcct == 0) {
             System.out.println("Account Database is empty!");

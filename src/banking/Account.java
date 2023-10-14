@@ -10,6 +10,10 @@ public abstract class Account implements Comparable<Account> {
         this.holder = profile;
         this.balance = deposit;
     }
+    public double getBalance() {
+        return balance;
+    }
+
     @Override
     public boolean equals(Object obj) {
         Account account = (Account) obj;
@@ -51,4 +55,9 @@ public abstract class Account implements Comparable<Account> {
     public abstract double monthlyInterest();
     public abstract double monthlyFee();
 
+    public void deposit(double amount) {
+        if (amount > 0) {
+            balance += amount;
+        }
+    }
 }
