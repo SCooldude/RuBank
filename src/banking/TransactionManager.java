@@ -227,7 +227,7 @@ public class TransactionManager {
                             break;
                         }
 
-                        Date date = Date.fromDateStr("01/01/2000"); // Replace with the appropriate date or method to create a date.
+                        Date date = Date.fromDateStr(dateString); // Replace with the appropriate date or method to create a date.
 
                         if (!date.isFutureDate()) {
                             System.out.println("DOB invalid: " + dateString + " cannot be today or a future day.");
@@ -243,8 +243,19 @@ public class TransactionManager {
                             case "CC" -> new CollegeChecking(profile, depositAmount, Campus.NEW_BRUNSWICK);
                             default -> null;
                         };
-                        accountDatabase.deposit(shellAccount);
-                            System.out.println(firstName + " " + lastName + " " + "(" + accountType + ")" + " deposited $" + depositAmount);
+                        boolean accountExists = false;
+                        for (int i = 0; i < accountDatabase.getNumAcct(); i++) {
+                            if (accountDatabase.getAccounts()[i].equals(shellAccount)) {
+                                accountExists = true;
+                                accountDatabase.getAccounts()[i].deposit(depositAmount);
+                                System.out.println(firstName + " " + lastName + " (" + accountType + ") deposited $" + depositAmount);
+                                break;
+                            }
+                        }
+
+                        if (!accountExists) {
+                            System.out.println(firstName + " " + lastName + " (" + accountType + ") is not in the database.");
+                        }
                         break;
                     }
 
