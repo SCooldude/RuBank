@@ -172,7 +172,7 @@ public class AccountDatabase {
             for (int i = 0; i < numAcct; i++) {
                 double MFee = accounts[i].monthlyFee();
                 double MIntrestrate = accounts[i].monthlyInterest();
-                accounts[i].balance= accounts[i].balance + MFee +MIntrestrate;
+                accounts[i].balance= accounts[i].balance - MFee + MIntrestrate;
 
                 System.out.println(accounts[i].toString());
 
