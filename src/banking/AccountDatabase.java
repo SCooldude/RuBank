@@ -33,7 +33,7 @@ public class AccountDatabase {
     } //increase the capacity by 4
     public boolean contains(Account account){
         return false;
-    }
+    } //(over load if we need it)
     public boolean open(Account account){
         int duplicateIndex = find(account);
         if (duplicateIndex != NOT_FOUND) {
@@ -62,7 +62,13 @@ public class AccountDatabase {
     public boolean withdraw(Account account){
         return false;
     } //false if insufficient fund
-    public void deposit(Account account){}
+    public void deposit(Account account){
+        double amount=account.balance;
+        if (amount>0){
+            
+        }
+
+    }
     public void printSorted() {
         if (numAcct == 0) {
             System.out.println("Account Database is empty!");
