@@ -63,8 +63,17 @@ public class AccountDatabase {
         }
     }
     public boolean withdraw(Account account){
+        for (int i = 0; i < numAcct; i++ ) {
+            if (accounts[i].equals(account)){
+                if (accounts[i].withdraw(account.getBalance())) {
+                    return true;
+                } else {
+                    return false;
+                }
+            }
+        }
         return false;
-    } //false if insufficient fund
+    }
     public void deposit(Account account){
         boolean accountExists = false;
         for (int i = 0; i < numAcct; i++) {

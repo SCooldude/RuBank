@@ -26,7 +26,7 @@ public class MoneyMarket extends Savings {
         return 0;
     }
     public boolean loyaltyStatus(){
-        return !(balance < 2000.0);
+        return (balance >= 2000.0);
     }
     @Override
     public double monthlyFee() {
@@ -39,6 +39,9 @@ public class MoneyMarket extends Savings {
     }
     @Override
     public String toString() {
+        if (!loyaltyStatus()) {
+            isLoyal = false;
+        }
         return super.toString() + "::withdrawal: " + withdrawl;
     }
     @Override

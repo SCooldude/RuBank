@@ -251,8 +251,54 @@ public class TransactionManager {
                         accountDatabase.deposit(shellAccount);
                         break;
                     }
+                    case ("W"): {
+                        if (tokenizer.countTokens() < 4) {
+                            System.out.println("Missing data for the withdrawal operation.");
+                            break;
+                        }
 
-                    case ("W"):
+                        String accountType = tokenizer.nextToken();
+                        String firstName = tokenizer.nextToken();
+                        String lastName = tokenizer.nextToken();
+                        String dateString = tokenizer.nextToken();
+                        double withdrawalAmount = 0.0;
+
+                        try {
+                            withdrawalAmount = Double.parseDouble(tokenizer.nextToken());
+                        } catch (NumberFormatException e) {
+                            System.out.println("Not a valid amount.");
+                            break;
+                        }
+                        if (withdrawalAmount <= 0.0) {
+                            System.out.println("Withdrawal - amount cannot be 0 or negative.");
+                            break;
+                        }
+
+                        Date date = Date.fromDateStr(dateString);
+
+                        if (!date.isFutureDate()) {
+                            System.out.println("DOB invalid: " + date + " cannot be today or a future day.");
+                            break;
+                        }
+
+                        Profile profile = new Profile(firstName, lastName, date);
+
+                        Account shellAccount = switch (accountType) {
+                            case "C" -> new Checking(profile, withdrawalAmount);
+                            case "MM" -> new MoneyMarket(profile, withdrawalAmount, true, 0);
+                            case "S" -> new Savings(profile, withdrawalAmount, false);
+                            case "CC" -> new CollegeChecking(profile, withdrawalAmount, Campus.NEW_BRUNSWICK);
+                            default -> null;
+                        };
+
+                        if (accountDatabase.withdraw(shellAccount)) {
+                            System.out.println(firstName + " " + lastName + " (" + accountType + ") Withdraw - balance updated.");
+                        } else {
+                            System.out.println(firstName + " " + lastName + " (" + accountType + ") Withdraw - insufficient fund.");
+                        }
+                        break;
+                    }
+
 
                     case ("P"):
                         accountDatabase.printSorted();

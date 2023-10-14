@@ -82,6 +82,13 @@ public abstract class Account implements Comparable<Account> {
             balance += amount;
         }
     }
+    public boolean withdraw(double amount) {
+        if (amount > balance) {
+            return false;
+        }
+        balance -= amount;
+        return true;
+    }
 
     public Profile getHolder() {
         return holder;
