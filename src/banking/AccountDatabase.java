@@ -20,6 +20,9 @@ public class AccountDatabase {
         }
         return NOT_FOUND;
     }
+    public int getNumAcct() {
+        return numAcct;
+    }
     private void grow(){
         Account[] new_accounts = new Account[accounts.length + 4];
 
@@ -103,5 +106,9 @@ public class AccountDatabase {
         if (numAcct == 0){
             System.out.println("Account Database is empty!");
         }
+    }
+
+    public Account[] getAccounts() {
+        return accounts;
     }
 }
