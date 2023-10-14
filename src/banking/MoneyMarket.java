@@ -34,7 +34,7 @@ public class MoneyMarket extends Savings {
     }
     @Override
     public String toString() {
-        return super.toString() + "is loyal::withdrawal: " + withdrawal;
+        return super.toString() + "is loyal::withdrawal: " + withdrawl;
     }
     @Override
     public double monthlyInterest() {
