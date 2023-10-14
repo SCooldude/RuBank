@@ -66,12 +66,24 @@ public class AccountDatabase {
         return false;
     } //false if insufficient fund
     public void deposit(Account account){
+        boolean accountExists = false;
         for (int i = 0; i < numAcct; i++) {
-            if (accounts[i].equals(account)) {
+            if (accounts[i].equals(account, 5)) {
+                accountExists = true;
                 accounts[i].deposit(account.getBalance());
+                String message = account.getHolder().toString() + " (" + account.AA() + ") ";
+                if (account.getBalance() == 0) {
+                    System.out.println(message + "is not in the database.");
+                } else {
+                    System.out.println(message + "Deposit - balance updated.");
+                }
+                break;
             }
         }
-    }//d
+        if (!accountExists) {
+            System.out.println(account.getHolder().toString() + " (" + account.AA() + ") is not in the database.");
+        }
+    }
     public void printSorted() {
         if (numAcct == 0) {
             System.out.println("Account Database is empty!");
@@ -106,9 +118,5 @@ public class AccountDatabase {
         if (numAcct == 0){
             System.out.println("Account Database is empty!");
         }
-    }
-
-    public Account[] getAccounts() {
-        return accounts;
     }
 }

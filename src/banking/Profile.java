@@ -51,6 +51,14 @@ public class Profile implements Comparable<Profile> {
     public String toString() {
         return fname + " " + lname + " " + dob.getMonth() + "/" + dob.getDay() +  "/" + dob.getYear();
     }
+
+
+    public String getFirstName() {
+        return fname;
+    }
+    public String getLastName() {
+        return lname;
+    }
 }
 
 

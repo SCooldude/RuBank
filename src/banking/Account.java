@@ -1,10 +1,15 @@
 package banking;
 
+import java.text.DecimalFormat;
+
+
 public abstract class Account implements Comparable<Account> {
     protected Profile holder;
     protected double balance;
 
     public abstract String accountType();
+
+    public abstract String AA();
 
     public Account(Profile profile, double deposit) {
         this.holder = profile;
@@ -36,6 +41,23 @@ public abstract class Account implements Comparable<Account> {
 
         return getClass() == obj.getClass();
     }
+    public boolean equals(Object obj, int x) {
+        Account account = (Account) obj;
+        if (!holder.equals(account.holder)) {
+            return false;
+        }
+        if (this.accountType().equals("Checking") && account.accountType().equals("CollegeChecking")) {
+            return false;
+        }
+        if (this.accountType().equals("CollegeChecking") && account.accountType().equals("Checking")) {
+            return false;
+        }
+
+
+        return getClass() == obj.getClass();
+    }
+
+
 
     @Override
     public int compareTo(Account account) {
@@ -48,7 +70,8 @@ public abstract class Account implements Comparable<Account> {
     }
     @Override
     public String toString() {
-        return accountType() + "::" + holder + "::Balance $" + String.format("%.2f", balance);
+        DecimalFormat df = new DecimalFormat("#,##0.00");
+        return accountType() + "::" + holder + "::Balance $" + df.format(balance);
     }
 
     public abstract double monthlyInterest();
@@ -58,5 +81,9 @@ public abstract class Account implements Comparable<Account> {
         if (amount > 0) {
             balance += amount;
         }
+    }
+
+    public Profile getHolder() {
+        return holder;
     }
 }

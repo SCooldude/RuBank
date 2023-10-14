@@ -202,7 +202,7 @@ public class TransactionManager {
                         };
 
                         if (accountDatabase.close(accountToClose)) {
-                            System.out.println(firstName + " " + lastName + " " + dateString + " (" + accountType + ")" + " closed.");
+                            System.out.println(firstName + " " + lastName + " " + dateString + " (" + accountType + ")" + " has been closed.");
                         } else {
                             System.out.println(firstName + " " + lastName + " " + dateString + " (" + accountType + ")" + " is not in the database.");
                         }
@@ -223,7 +223,11 @@ public class TransactionManager {
                         try {
                             depositAmount = Double.parseDouble(tokenizer.nextToken());
                         } catch (NumberFormatException e) {
-                            System.out.println("Invalid deposit amount.");
+                            System.out.println("Not a valid amount.");
+                            break;
+                        }
+                        if (depositAmount <= 0.0) {
+                            System.out.println("Deposit - amount cannot be 0 or negative.");
                             break;
                         }
 
@@ -244,22 +248,9 @@ public class TransactionManager {
                             default -> null;
                         };
 
-                        boolean accountExists = false;
-                        for (int i = 0; i < accountDatabase.getNumAcct(); i++) {
-                            if (accountDatabase.getAccounts()[i].equals(shellAccount)) {
-                                accountExists = true;
-                                accountDatabase.getAccounts()[i].deposit(depositAmount);
-                                System.out.println(firstName + " " + lastName + " (" + accountType + ") deposited $" + depositAmount);
-                                break;
-                            }
-                        }
-
-                        if (!accountExists) {
-                            System.out.println(firstName + " " + lastName + " (" + accountType + ") is not in the database.");
-                        }
+                        accountDatabase.deposit(shellAccount);
                         break;
                     }
-
 
                     case ("W"):
 

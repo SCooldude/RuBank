@@ -9,6 +9,10 @@ public class Checking extends Account {
     public String accountType() {
         return "Checking";
     }
+    @Override
+    public String AA() {
+        return "C";
+    }
 
 
     public Checking(Profile profile, double deposit) {

@@ -13,6 +13,11 @@ public class MoneyMarket extends Savings {
         return "MoneyMarket";
     }
 
+    @Override
+    public String AA() {
+        return "MM";
+    }
+
     private double withdrawalFee() {
         if (withdrawl > 3.0) {
             return 10.0;
@@ -34,7 +39,7 @@ public class MoneyMarket extends Savings {
     }
     @Override
     public String toString() {
-        return super.toString() + "is loyal::withdrawal: " + withdrawl;
+        return super.toString() + "::withdrawal: " + withdrawl;
     }
     @Override
     public double monthlyInterest() {

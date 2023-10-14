@@ -24,6 +24,10 @@ public class CollegeChecking extends Checking {
         return 0;
     }
     @Override
+    public String AA() {
+        return "CC";
+    }
+    @Override
     public String toString() {
         return super.toString() + "::" + campus;
     }
