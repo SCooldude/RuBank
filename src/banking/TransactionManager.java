@@ -2,14 +2,26 @@ package banking;
 
 import java.util.Scanner;
 import java.util.StringTokenizer;
-
+/**
+ * This class represents a Transaction Manager for handling various banking operations.
+ * It interacts with the AccountDatabase to perform operations on customer accounts.
+ *
+ * @author Fraidoon Pourooshasb, Samman Pandey
+ */
 public class TransactionManager {
 
     private final AccountDatabase accountDatabase;
 
+    /**
+     * Initializes the TransactionManager and creates a new AccountDatabase.
+     */
     public TransactionManager() {
         accountDatabase = new AccountDatabase();
     }
+
+    /**
+     * Starts the Transaction Manager and processes user commands from the console.
+     */
     public void run() {
         System.out.println("Transaction Manager is running.");
 
@@ -28,6 +40,12 @@ public class TransactionManager {
 
         System.out.println("Transaction Manager is terminated.");
     }
+
+    /**
+     * Processes a user command and performs the corresponding operation.
+     *
+     * @param command The user's command as a string.
+     */
     private void processCommand(String command) {
         StringTokenizer tokenizer = new StringTokenizer(command);
         boolean invalidcode = false;
