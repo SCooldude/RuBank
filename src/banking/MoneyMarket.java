@@ -18,7 +18,8 @@ public class MoneyMarket extends Savings {
         return "MM";
     }
 
-    private double withdrawalFee() {
+    @Override
+    public double withdrawalFee() {
         if (withdrawl > 3.0) {
             return 10.0;
         }

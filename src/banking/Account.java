@@ -89,8 +89,14 @@ public abstract class Account implements Comparable<Account> {
         balance -= amount;
         return true;
     }
+    public double withdrawalFee(){
+        return 0;
+    }
+
+
 
     public Profile getHolder() {
         return holder;
     }
+
 }
