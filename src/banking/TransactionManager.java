@@ -297,6 +297,10 @@ public class TransactionManager {
                                 accountExists = true;
                                 boolean withdrawalStatus = accountDatabase.withdraw(shellAccount);
                                 if (withdrawalStatus) {
+                                    if (accountType.equals("MM")) {
+                                        MoneyMarket moneyMarketAccount = (MoneyMarket) accountDatabase.getAccounts()[i];
+                                        moneyMarketAccount.increaseWithdrawal();
+                                    }
                                     System.out.println(firstName + " " + lastName + " " + dateString + " (" + accountType + ") Withdrawal - balance updated.");
                                 } else {
                                     System.out.println(firstName + " " + lastName + " " + dateString + " (" + accountType + ") Withdrawal - insufficient funds.");

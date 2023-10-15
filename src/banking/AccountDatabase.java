@@ -170,9 +170,14 @@ public class AccountDatabase {
                 }
             }
             for (int i = 0; i < numAcct; i++) {
+
                 double MFee = accounts[i].monthlyFee()+accounts[i].withdrawalFee();
                 double MIntrestrate = accounts[i].monthlyInterest();
                 accounts[i].balance= accounts[i].balance - MFee + MIntrestrate;
+
+                if (accounts[i] instanceof MoneyMarket) {
+                    ((MoneyMarket) accounts[i]).resetWithdrawal();
+                }
 
                 System.out.println(accounts[i].toString());
 

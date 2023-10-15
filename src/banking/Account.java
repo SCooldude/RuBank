@@ -93,8 +93,6 @@ public abstract class Account implements Comparable<Account> {
         return 0;
     }
 
-
-
     public Profile getHolder() {
         return holder;
     }

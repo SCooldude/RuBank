@@ -55,4 +55,11 @@ public class MoneyMarket extends Savings {
             return (balance*0.045)/12.0;
         }
     }
+    public void increaseWithdrawal() {
+        withdrawl ++;
+    }
+
+    public void resetWithdrawal() {
+        withdrawl = 0;
+    }
 }
