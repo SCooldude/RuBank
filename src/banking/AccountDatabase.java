@@ -75,7 +75,8 @@ public class AccountDatabase {
      * @return true if the account is in the database, false otherwise
      */
     public boolean contains(Account account){
-        return false;
+        int found = find(account);
+        return found != NOT_FOUND;
     }
 
     /**

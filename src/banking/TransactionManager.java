@@ -134,6 +134,9 @@ public class TransactionManager {
                                     }
                                     Profile profile = new Profile(firstName, lastName, date);
                                     account = new Savings(profile, deposit, isLoyal);
+
+                                    boolean contains = accountDatabase.contains(account);
+
                                 } catch (NumberFormatException e) {
                                     System.out.println("Not a valid amount.");
                                 }
@@ -298,6 +301,7 @@ public class TransactionManager {
                             System.out.println("DOB invalid: " + date + " cannot be today or a future day.");
                             break;
                         }
+
 
                         Profile profile = new Profile(firstName, lastName, date);
 

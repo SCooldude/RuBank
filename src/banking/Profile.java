@@ -13,9 +13,9 @@ public class Profile implements Comparable<Profile> {
     /**
      * Constructor for creating a profile with a first name, last name, and date of birth.
      *
-     * @param firstName    the first name
-     * @param lastName     the last name
-     * @param dateOfBirth  the date of birth
+     * @param firstName   the first name
+     * @param lastName    the last name
+     * @param dateOfBirth the date of birth
      */
     public Profile(String firstName, String lastName, Date dateOfBirth) {
         this.fname = firstName;
@@ -28,7 +28,7 @@ public class Profile implements Comparable<Profile> {
      *
      * @param other the profile to compare to
      * @return a negative value if this profile is less than the other, 0 if they are equal,
-     *         or a positive value if this profile is greater than the other
+     * or a positive value if this profile is greater than the other
      */
     @Override
     public int compareTo(Profile other) { // Comparison based on last name, first name, and date of birth
@@ -80,25 +80,7 @@ public class Profile implements Comparable<Profile> {
      */
     @Override
     public String toString() {
-        return fname + " " + lname + " " + dob.getMonth() + "/" + dob.getDay() +  "/" + dob.getYear();
-    }
-
-    /**
-     * Get the first name from the profile.
-     *
-     * @return the first name
-     */
-    public String getFirstName() {
-        return fname;
-    }
-
-    /**
-     * Get the last name from the profile.
-     *
-     * @return the last name
-     */
-    public String getLastName() {
-        return lname;
+        return fname + " " + lname + " " + dob.getMonth() + "/" + dob.getDay() + "/" + dob.getYear();
     }
 }
 
