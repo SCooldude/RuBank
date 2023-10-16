@@ -50,6 +50,12 @@ public abstract class Account implements Comparable<Account> {
         return balance;
     }
 
+    /**
+     * Checks if the accounts are equal
+     *
+     * @param obj takes in any object
+     * @return true if the objects are equal, and false otherwise
+     */
     @Override
     public boolean equals(Object obj) {
         Account account = (Account) obj;
@@ -99,6 +105,13 @@ public abstract class Account implements Comparable<Account> {
 
 
 
+    /**
+     * Compares this account to another account for sorting purposes based on their date and start time.
+     *
+     * @param account,  The account to compare to this account.
+     * @return 0 if both accounts are equal, a positive value if this account is greater,
+     * and a negative value if this account is lesser.
+     */
     @Override
     public int compareTo(Account account) {
         int accountTypeComparison = this.accountType().compareTo(account.accountType());
@@ -108,6 +121,13 @@ public abstract class Account implements Comparable<Account> {
 
         return this.holder.compareTo(account.holder);
     }
+
+    /**
+     * Returns a string representation of this account transaction,
+     * including its date of birth, the names and the balance in the account.
+     *
+     * @return A formatted string representing the account.
+     */
     @Override
     public String toString() {
         DecimalFormat df = new DecimalFormat("#,##0.00");
