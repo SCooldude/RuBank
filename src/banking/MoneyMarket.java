@@ -1,5 +1,7 @@
 package banking;
 
+import java.text.DecimalFormat;
+
 public class MoneyMarket extends Savings {
     private int withdrawl; //number of withdrawals
 
@@ -43,7 +45,8 @@ public class MoneyMarket extends Savings {
         if (!loyaltyStatus()) {
             isLoyal = false;
         }
-        return super.toString() + "::withdrawal: " + withdrawl;
+        DecimalFormat df = new DecimalFormat("#,##0.00");
+        return accountType() + "::Savings::" + holder + "::Balance $" + df.format(balance) + "::withdrawal: " + withdrawl;
     }
     @Override
     public double monthlyInterest() {
