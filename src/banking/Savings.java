@@ -19,12 +19,19 @@ public class Savings extends Account {
         this.isLoyal = loyal;
     }
 
+    /**
+     * A getter used to get the account_type when comparing accounts for the equals method
+     */
     @Override
     public String accountType() {
         return "Savings";
     }
 
 
+    /**
+     *
+     * Gets the monthly interest rate
+     */
     @Override
     public double monthlyInterest() {
         if (isLoyal){
@@ -35,6 +42,10 @@ public class Savings extends Account {
 
     }
 
+    /**
+     *
+     * Gets the monthly fee for each account
+     */
     @Override
     public double monthlyFee() {
         if (balance >= 500.0) {
@@ -43,13 +54,20 @@ public class Savings extends Account {
             return 25.0; // Monthly fee for balances below $500
         }
     }
+    /**
+     *
+     * Convert Savings account to string to print
+     */
     @Override
     public String toString() {
         return super.toString() + (isLoyal ? "::is loyal" : "");
     }// Include loyalty status in the account's string representation
 
-    @Override
-    public String AA() {
+    /**
+     *
+     * Gets the short version of accountType string
+     */
+    public String short_AccountType() {
         return "S";
     }
 }

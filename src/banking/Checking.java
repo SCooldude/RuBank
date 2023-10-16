@@ -10,12 +10,15 @@ public class Checking extends Account {
     private static final double INTEREST_RATE = 0.01;
     private static final double MONTHLY_FEE_THRESHOLD = 1000.00;
 
+    /**
+     * A getter used to get the account_type when comparing accounts for the equals method
+     */
     @Override
     public String accountType() {
         return "Checking";
     }
     @Override
-    public String AA() {
+    public String short_AccountType() {
         return "C";
     }
 
@@ -29,14 +32,22 @@ public class Checking extends Account {
         super(profile, deposit);
     }
 
+    /**
+     *
+     * Calculate and return the monthly interest for a Checking account.
+     */
     @Override
-    public double monthlyInterest() { // Calculate and return the monthly interest for a Checking account.
+    public double monthlyInterest() {
 
         return (balance * INTEREST_RATE) / 12.0;
     }
 
+    /**
+     *
+     * Calculate and return the monthly fee for a Checking account.
+     */
     @Override
-    public double monthlyFee() {// Calculate and return the monthly fee for a Checking account.
+    public double monthlyFee() {
         if (balance >= MONTHLY_FEE_THRESHOLD) {
             return 0.00;
         } else {

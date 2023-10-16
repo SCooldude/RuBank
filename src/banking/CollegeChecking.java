@@ -19,6 +19,10 @@ public class CollegeChecking extends Checking {
         super(profile, deposit);
         this.campus = campus;
     }
+
+    /**
+     * A getter used to get the account_type when comparing accounts for the equals method
+     */
     @Override
     public String accountType() {
         return "CollegeChecking";
@@ -45,15 +49,28 @@ public class CollegeChecking extends Checking {
         }
     return 0.00;
     }
+    /**
+     *
+     * Gets the short version of accountType string
+     */
     @Override
-    public String AA() {
+    public String short_AccountType() {
         return "CC";
     }
+
+    /**
+     *
+     * Gets the string version of the account to print
+     */
     @Override
     public String toString() {
         return super.toString() + "::" + campus;
     }
 
+    /**
+     *
+     * Returns the monthly_fee
+     */
     @Override
     public double monthlyFee() {
             return 0;

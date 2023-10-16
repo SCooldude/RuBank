@@ -26,16 +26,29 @@ public class MoneyMarket extends Savings {
         super(profile, deposit, isLoyal);
         this.withdrawl = withdrawal;
     }
+
+    /**
+     * A getter used to get the account_type when comparing accounts for the equals method
+     */
     @Override
     public String accountType() {
         return "MoneyMarket";
     }
 
+    /**
+     *
+     * Gets the short string version for printing
+     */
     @Override
-    public String AA() {
+    public String short_AccountType() {
         return "MM";
     }
 
+
+    /**
+     *
+     * Gets the withdrawal fee for the account
+     */
     @Override
     public double withdrawalFee() {
         if (withdrawl > 3.0) {

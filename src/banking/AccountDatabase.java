@@ -148,7 +148,7 @@ public class AccountDatabase {
             if (accounts[i].equals(account, 5)) {
                 accountExists = true;
                 accounts[i].deposit(account.getBalance());
-                String message = account.getHolder().toString() + " (" + account.AA() + ") ";
+                String message = account.getHolder().toString() + " (" + account.short_AccountType() + ") ";
                 if (account.getBalance() == 0) {
                     System.out.println(message + "is not in the database.");
                 } else {
@@ -158,7 +158,7 @@ public class AccountDatabase {
             }
         }
         if (!accountExists) {
-            System.out.println(account.getHolder().toString() + " (" + account.AA() + ") is not in the database.");
+            System.out.println(account.getHolder().toString() + " (" + account.short_AccountType() + ") is not in the database.");
         }
     }
 

@@ -5,6 +5,9 @@ import org.junit.Test;
 
 public class AccountDatabaseTest {
 
+    /**
+     * Test Case 1
+     */
     @Test
     public void testCloseAccountFound() {
         AccountDatabase accountDatabase = new AccountDatabase();
@@ -25,6 +28,9 @@ public class AccountDatabaseTest {
         assertTrue(result);
     }
 
+    /**
+     * Test Case 2
+     */
     @Test
     public void testCloseAccountNotFound() {
 

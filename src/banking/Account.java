@@ -28,7 +28,7 @@ public abstract class Account implements Comparable<Account> {
      * @return the AA code
      */
 
-    public abstract String AA();
+    public abstract String short_AccountType();
 
     /**
      * Constructor for creating an Account with a given profile and initial deposit.
